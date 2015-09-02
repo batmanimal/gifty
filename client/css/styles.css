@@ -8,17 +8,109 @@
   box-sizing: border-box;
 }
 
+.flex-container {
+  display: -webkit-flex; /* for safari */
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.flex-item {
+  /*text-align: center;*/
+}
+
+.viewport {
+  height: 100vw; 
+  width: 56.25vw; /* height:width ratio = 9/16 = .5625  */
+  /*background: #BBB;*/
+  max-height: 177.78vh;
+  max-width: 100vh; /* 16/9 = 1.778 */
+  /*margin: auto;*/
+  position: absolute;
+  top:0;bottom:0; /* vertical center */
+  left:0;right:0; /* horizontal center */
+}
+
 .teal {
+  background-color: #017E82;
+}
+
+.dark-teal {
+  background-color: #004851;
+}
+
+.teal-font {
   color: #017E82;
+}
+
+.white {
+  background-color: #FFF;
+}
+.white-font {
+  color: #FFF;
+}
+
+.proxima {
+  font-family: "proxima-nova", sans-serif;
+  text-align: center;
+  font-weight: 100;
 }
 
 /***********************************/
 /******** LOGIN SCREEN *********/
 /***********************************/
 
+.login-container {
+  background-color: #017E82;
+}
+
+.logo {
+
+}
+
+.icon-container {
+  text-align: center;
+}
+
+.brand-container {
+  margin-bottom: 50%;
+  text-align: center;
+}
+
+#login-button {
+  width: 250px;
+  height: 80px;
+  position: relative;
+  align-items: baseline;
+  border-color: #004851;
+  font-size: 250%;
+  font-weight: lighter;
+  margin-bottom: -80%;
+}
+
+.login-button-text {
+  opacity: 0.8;
+}
+
+.login-button-container {
+  background-color: #017E82;
+  /*align-self: flex-end;*/
+}
+
+.gyftee-text {
+  font-family: "proxima-nova", sans-serif;
+  font-weight: 400;
+  font-size: 400%;
+  color: #FFF;
+}
 
 /***********************************/
-/** Gift Detail View **/
+/******** GIFT DETAIL VIEW ********/
 /************************************/
 
 .gift-detail-container {
@@ -50,7 +142,7 @@
 /***********************************/
 /******** AUTH0 STYLING *********/
 /***********************************/
-
+/*
 .auth {
   font-family: "proxima-nova", sans-serif;
   text-align: center;
@@ -169,6 +261,6 @@ h3 {
 .auth .login-page .login-box {
   padding: 100px 0;
 }
-
+*/
 
 
