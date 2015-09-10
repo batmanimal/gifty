@@ -480,6 +480,7 @@ li>a.nav-menu-item {
 .friend-header {
   padding: 0 10px 0 10%;
   text-align: left;
+  flex: 1;
 }
 
 .friend-header-name {
@@ -494,6 +495,9 @@ li>a.nav-menu-item {
   padding-bottom: 0px;
   font-weight: bold;
   color: #017E82;
+}
+.friend-profile-photo-container {
+  flex: 1;
 }
 
 .filter-button {
