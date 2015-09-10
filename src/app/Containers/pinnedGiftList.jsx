@@ -1,16 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BOOK } from '../Components/book';
+import Navbar from '../Components/navbar';
 import PORT from '../../config/port';
+import WishList from '../Components/wishlist'
 
 var PinnedGiftList = React.createClass({
 
   render: function() {
-    return (
-      <div className="gift">
+    if(this.state){
+      return (
+          <div className="gift">
+            <NavBar />
+            <WishList wishlist={this.state.wishlist}/>
+          </div>
+      );
+    }else{
+      return (
+        <div className="gift">
+          <NavBar />
+          Fetching Wishlist Items...
+        </div>
+      );
+    }
+  },
 
-      </div>
-    );
+  setInitialState: function(){
+    return {
+      wishlist: ''
+    }
   },
 
   componentDidMount: function(){
@@ -28,7 +45,6 @@ var PinnedGiftList = React.createClass({
       url: "http://localhost:" + PORT.PORT + "/api/friends/getwishlist/" + friendId + "/" + userId,
       method: 'GET',
       success: function(data) {
-        console.log(data);
         this.getGiftFromAmazon(data);
         // = JSON.parse(data);
       }.bind(this),
@@ -45,18 +61,14 @@ var PinnedGiftList = React.createClass({
       method: 'POST',
       data: {giftArr : giftArr},
       success: function(data) {
-        console.log(data);
+        this.setState({wishlist : data});
         // = JSON.parse(data);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error("http://localhost:" + PORT.PORT + "/api/friends", status, err.toString());
       }
     });
-
-  },
-
-
-
+  }
 
 });
 

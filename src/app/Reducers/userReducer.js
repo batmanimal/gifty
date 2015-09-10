@@ -1,6 +1,6 @@
-import { ADD_FRIEND, REMOVE_FRIEND, FETCH_FRIENDS, GET_USER } from '../Constants/ActionTypes';
+import { ADD_FRIEND, REMOVE_FRIEND, FETCH_FRIENDS, GET_USER, SET_LOCK } from '../Constants/ActionTypes';
 
-const initialState = { profile: {}, friends: [] };
+const initialState = { profile: {}, friends: [], lock: {} };
 
 export default function userReducer(state=initialState, action) {
   // DO NOT mutate the state, return a NEW state
@@ -18,7 +18,7 @@ export default function userReducer(state=initialState, action) {
       return Object.assign({}, state, { friends: friends });
 
     case FETCH_FRIENDS:
-        case FETCH_FRIENDS:
+    
       var getDaysFromToday = function(birthday) {
         if(!birthday) {
           return null;
@@ -37,6 +37,7 @@ export default function userReducer(state=initialState, action) {
         var friendBdayArray = birthday.split('/');
         var friendBdayMonth = friendBdayArray[0];
         var friendBdayDD = friendBdayArray[1];
+
         // create new Date, replacing birth year with current year
         var friendBday = new Date(currentYear, friendBdayMonth, friendBdayDD);
 
@@ -48,9 +49,8 @@ export default function userReducer(state=initialState, action) {
         // add 365 to any negative daysFromToday value to get days until next year's date
         daysFromToday > 0 ? daysFromToday = daysFromToday : daysFromToday = daysFromToday + 365;
         
-        return daysFromToday;
+        return daysFromToday;    
       };
-
       // append daysFromToday to each friend object and push to friends array
       var friends = [];
       action.friends.forEach(function(friend) {
@@ -68,11 +68,14 @@ export default function userReducer(state=initialState, action) {
         }
         return friendA.daysFromToday - friendB.daysFromToday;
       });
-      // es6 syntax to return the updated state
+      // finally, return the updated state (es6 syntax)
       return Object.assign({}, state, { friends: friends });
 
     case GET_USER:
       return Object.assign({}, state, { profile: action.profile });
+
+    case SET_LOCK:
+      return Object.assign({}, state, { lock: action.lock });
 
     default:
       return state;
