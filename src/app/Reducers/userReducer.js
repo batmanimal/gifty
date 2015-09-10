@@ -1,6 +1,6 @@
-import { ADD_FRIEND, REMOVE_FRIEND, FETCH_FRIENDS, GET_USER } from '../Constants/ActionTypes';
+import { ADD_FRIEND, REMOVE_FRIEND, FETCH_FRIENDS, GET_USER, SET_LOCK } from '../Constants/ActionTypes';
 
-const initialState = { profile: {}, friends: [] };
+const initialState = { profile: {}, friends: [], lock: {} };
 
 export default function userReducer(state=initialState, action) {
   // DO NOT mutate the state, return a NEW state
@@ -23,21 +23,27 @@ export default function userReducer(state=initialState, action) {
           return null;
         }
         var today = new Date();
+        // add 1 to current month bc getMonth starts at Jan = 0
+        var currentMonth = today.getMonth() + 1;
         var currentYear = today.getFullYear();
+        var currentDD = today.getDate();
+        today = new Date(currentYear, currentMonth, currentDD);
+
         var friendBdayArray = birthday.split('/');
         var friendBdayMonth = friendBdayArray[0];
         var friendBdayDD = friendBdayArray[1];
-        // replace year with current year 
+        // replace year with current year
         var friendBday = new Date(currentYear, friendBdayMonth, friendBdayDD);
-        // calculate days from now to the bday; getTime() returns time in ms 
-        var elapsed = friendBday.getTime() - today.getTime();
+        // calculate days from now to the bday; getTime() returns time in ms
+        var elapsed = ( friendBday.getTime() - today.getTime() );
         // 86,400,000 ms per day
-        var daysFromToday = Math.floor(elapsed / 86400000); 
-        // add 365 days to get upcoming day 
-        if(daysFromToday < 0) {
-          daysFromToday = daysFromToday + 365;
-        }
-        return daysFromToday;    
+        var daysFromToday = Math.floor(elapsed / 86400000);
+        // add 365 days to get upcoming day
+        // if(daysFromToday < 0) {
+        //   daysFromToday = daysFromToday + 365;
+        // }
+        daysFromToday > 0 ? daysFromToday = daysFromToday : daysFromToday = daysFromToday + 365;
+        return daysFromToday;
       };
 
       var friends = [];
@@ -46,20 +52,23 @@ export default function userReducer(state=initialState, action) {
         friends.push(friend);
       });
 
-      friends.sort(function(a, b){
-        if (a.daysFromToday === null) {
+      friends.sort(function(friendA, friendB){
+        if (friendA.daysFromToday === null) {
           return 1;
         }
-        if (b.daysFromToday === null) {
+        if (friendB.daysFromToday === null) {
           return -1;
         }
-        return a.daysFromToday - b.daysFromToday;
+        return friendA.daysFromToday - friendB.daysFromToday;
       });
 
       return Object.assign({}, state, { friends: friends });
 
     case GET_USER:
       return Object.assign({}, state, { profile: action.profile });
+
+    case SET_LOCK:
+      return Object.assign({}, state, { lock: action.lock });
 
     default:
       return state;
