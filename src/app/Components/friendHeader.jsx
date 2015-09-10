@@ -9,7 +9,7 @@ var FriendHeader = React.createClass({
   render: function(){
 
     if(this.props.user.friend !== null){
-      console.log(this.props.url)
+
       return (
       <div className="friend-info">
         <div className="friend-header-container container flex-container">
