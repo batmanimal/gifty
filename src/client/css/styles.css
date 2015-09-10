@@ -374,7 +374,9 @@ li>a.nav-menu-item:hover, .navbar-brand>a:hover {
   color: #004851;
 }
 
-
+.no-bday {
+  font-size: 0.8em;
+}
 
 /***********************************/
 /******** ALL FRIEND VIEW ********/
