@@ -392,6 +392,7 @@ li>a.nav-menu-item:hover, .navbar-brand>a:hover {
 }
 
 
+
 /***********************************/
 /******** GIFT DETAIL VIEW ********/
 /************************************/
@@ -456,6 +457,12 @@ li>a.nav-menu-item:hover, .navbar-brand>a:hover {
   text-align: center;
   width: 100%;
 }
+
+.add-to-list-button:hover{
+  background-color: #017E82;
+  color: white;
+}
+
 .book-text-container {
   padding: 5px 0 10px 0;
 }
@@ -467,6 +474,11 @@ li>a.nav-menu-item:hover, .navbar-brand>a:hover {
 
 .based-on-container {
   padding: 10px;
+}
+
+.saved {
+  font-size: 0.7em;
+  background-color: white;
 }
 
 
