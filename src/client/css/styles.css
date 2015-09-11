@@ -479,6 +479,7 @@ li>a.nav-menu-item:hover, .navbar-brand>a:hover {
 .saved {
   font-size: 0.7em;
   background-color: white;
+  border-radius: 5%;
 }
 
 
